@@ -13,22 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @EnableFeignClients
 public class HelloClientApplication {
-	/*@Autowired
-	HbaseCdc hbaseCdc;
-
-	@RequestMapping("/")
-	public String hello() {
-		return hbaseCdc.getObjectByPage();
-	}*/
 
 	public static void main(String[] args) {
 		SpringApplication.run(HelloClientApplication.class, args);
 	}
 
-	/*@FeignClient("HelloServer")
-	interface HelloClient {
-		@RequestMapping(value = "/", method = GET)
-		String hello();
-	}*/
 
 }
