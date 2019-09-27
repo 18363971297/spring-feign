@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="30">
+	<Properties>
+	    	<Property name="logdir">logs</Property>
+	</Properties>
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+		</Console>
+
+		<RollingFile name="allLog" fileName="${logdir}/all.log"
+					 filePattern="${logdir}/$${date:yyyy-MM}/all-%d{MM-dd-yyyy}-%i.log.gz">
+			<PatternLayout pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
+				<SizeBasedTriggeringPolicy size="600 MB" />
+				<OnStartupTriggeringPolicy />
+			</Policies>
+			<DefaultRolloverStrategy>
+				<Delete basePath="${baseDir}" maxDepth="1">
+					<IfFileName glob="all-*.log.gz" />
+					<IfLastModified age="5d" />
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingFile>
+
+	</Appenders>
+	<Loggers>
+
+		
+		<!-- 应用程序日志 -->
+		<logger name="com" level="DEBUG" additivity="true">
+			<AppenderRef ref="mobileLog" />
+		</logger>
+
+		<!-- 其他 -->
+		<logger name="org.aspectj" level="INFO" additivity="true">
+			<AppenderRef ref="mobileLog" />
+		</logger>
+		
+		<logger name="net.sf.ehcache" level="INFO" additivity="true">
+			<AppenderRef ref="mobileLog" />
+		</logger>
+
+
+		<Root>
+			<AppenderRef ref="Console" />
+		</Root>
+	</Loggers>
+</Configuration>
