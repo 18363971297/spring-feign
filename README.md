@@ -12,3 +12,8 @@ client
 server
    访问地址 
      http://localhost:8090/test/getUserPage
+     
+    
+issue
+  在整合中遇到了一些小坑，我在自己的博客中进行了整理
+  https://blog.csdn.net/shmily_lsl/article/details/101519273
